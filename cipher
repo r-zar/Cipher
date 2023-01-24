@@ -1,0 +1,40 @@
+package cipher;
+
+public class Cipher {
+    private String alfabet;
+    private int key;
+
+    public Cipher(String alfabet) {
+        this.alfabet = alfabet;
+    }
+
+    public void setAlfabet(String alfabet) {
+        this.alfabet = alfabet;
+    }
+
+    public String encrypt(String tekst, int key) {
+        this.key = key;
+        if (!tekst.matches("[" + alfabet + "]+")) {
+            throw new IllegalArgumentException("Tekst zawiera znaki spoza alfabetu");
+        }
+        return cipherText(tekst, key);
+    }
+
+    public String decrypt(String tekst, int key) {
+        if (!tekst.matches("[" + alfabet + "]+")) {
+            throw new IllegalArgumentException("Tekst zawiera znaki spoza alfabetu");
+        }
+        return cipherText(tekst, -key);
+    }
+
+    private String cipherText(String tekst, int key) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < tekst.length(); ++i) {
+            int ch = tekst.charAt(i);
+            int j = alfabet.indexOf(ch);
+            j = (j + key + alfabet.length()) % alfabet.length();
+            sb.append(alfabet.charAt(j));
+        }
+        return sb.toString();
+    }
+}
