@@ -1,0 +1,17 @@
+package cipher;
+
+public class Main {
+    public static void main(String[] args) {
+        String alfabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        int key = 1;
+        String t = "BCDYZA";
+        System.out.println("Tekst: " + t);
+
+        Cipher c = new Cipher(alfabet);
+
+        t = c.encrypt(t, key);
+        System.out.println("Encrypted: " + t);
+        t = c.decrypt(t, key);
+        System.out.println("Decrypted: " + t);
+    }
+}
